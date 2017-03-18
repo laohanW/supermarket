@@ -1,2 +1,0 @@
-# supermarket
-nodejs supermarket project
