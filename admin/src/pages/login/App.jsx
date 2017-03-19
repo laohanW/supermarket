@@ -1,14 +1,15 @@
 import React from 'react';
 import './App.scss';
 import {Provider} from 'react-redux';
-import {browserHistory,Router} from 'react-router';
+import {Router} from 'react-router';
+import {createBrowserHistory} from 'history';
 import Login from './containers/Login';
 import configureStore from './store/configureStore';
 
 
 const rootConfig={
 	path:"/",
-	IndexRoute:{component:Login},
+	component:Login,
 	childRoute:require('./containers')
 };
 class App extends React.Component
@@ -21,7 +22,7 @@ class App extends React.Component
 		super(props);
 		this.store=configureStore();
 		console.log(this.store);
-		console.log(browserHistory);
+		this.history=createBrowserHistory();
 	}
 	shouldComponentUpdate(dataProps,dataState)
 	{
@@ -39,7 +40,7 @@ class App extends React.Component
 	{
 		return(
 			<Provider store={this.store}>
-				<Router history={browserHistory} routes={rootConfig}/>
+				<Router history={this.history} routes={rootConfig}/>
 			</Provider>
 		);
 	}

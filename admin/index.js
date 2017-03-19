@@ -18,7 +18,7 @@ app.set('view engine','html');
 app.engine('html',require('ejs').renderFile);
 app.set('views',__dirname+'/build');
 
-app.get('/',function(req,res)
+app.get('*',function(req,res)
 {
 	res.render('login');
 });
