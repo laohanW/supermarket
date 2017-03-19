@@ -1,6 +1,16 @@
 import React from 'react';
-import {Grid,Row,Col,input} from 'react-bootstrap';
 import './App.scss';
+import {Provider} from 'react-redux';
+import {browserHistory,Router} from 'react-router';
+import Login from './containers/Login';
+import configureStore from './store/configureStore';
+
+
+const rootConfig={
+	path:"/",
+	IndexRoute:{component:Login},
+	childRoute:require('./containers')
+};
 class App extends React.Component
 {
 	static propTypes={
@@ -9,6 +19,9 @@ class App extends React.Component
 	constructor(props)
 	{
 		super(props);
+		this.store=configureStore();
+		console.log(this.store);
+		console.log(browserHistory);
 	}
 	shouldComponentUpdate(dataProps,dataState)
 	{
@@ -25,61 +38,9 @@ class App extends React.Component
 	render()
 	{
 		return(
-			<Grid>
-				<Row  className="justify-content-center">
-					<Col xs={4} md={4}> 
-						<div className="text-center">
-							<h1>
-								<i></i>
-								<span>Ace</span>
-								<span>Application</span>
-							</h1>
-							<h4>@ Company Name</h4>
-						</div>
-					</Col>
-				</Row>
-				<Row>
-					<Col xs={4} md={4}></Col>
-					<Col xs={4} md={4}>
-						<div>
-							<h4>
-								<i /> 
-								Please Enter Your Information
-							</h4>
-							<div className='space-6'/>
-							<form>
-								<div className="form-group row">
-									<label for="inputEmail3" class="col-sm-2 col-form-label">Email</label>
-									<div className='col-sm-10'>
-										<input type='email' class="form-control" id='inputEmail3' placeholder="email" />
-									</div>
-								</div>
-								<div className="form-group row">
-									<label for="inputPassword3" class="col-sm-2 col-form-label">Password</label>
-									<div className='col-sm-10'>
-										<input type='email' class="form-control" id='inputPassword3' placeholder="password" />
-									</div>
-								</div>
-								<div className='form-group row'>
-									<div className='col-sm-10'>
-										<div className='form-check'>
-											<label className='form-check-label'>
-												<input className='form-check-input' type='checkbox' />Check me out
-											</label>
-										</div>
-									</div>
-								</div>
-								<div className='form-group row'>
-									<div className='offset-sm-2 col-sm-10'>
-										<button type='submit' class='btn btn-primary'>Sign in</button>
-									</div>
-								</div>
-							</form>
-						</div>
-					</Col>
-					<Col xs={4} md={4}></Col>
-				</Row>
-			</Grid>
+			<Provider store={this.store}>
+				<Router history={browserHistory} routes={rootConfig}/>
+			</Provider>
 		);
 	}
 	componentDidMount()
