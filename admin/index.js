@@ -10,7 +10,7 @@ const server=new hapi.Server({
 		}
 	}
 });
-server.connection({host:"192.168.1.6",port:3000});
+server.connection({host:"192.168.38.134",port:3000});
 server.register(require('inert'),function(err){
 	hoek.assert(!err,err);
 });
@@ -29,7 +29,8 @@ server.route({
 	path:"/",
 	handler:function(req,reply)
 	{
-		reply.view('index/index');
+
+		reply.view('login/index');
 	}
 });
 server.route({
