@@ -1,5 +1,5 @@
 import fetch from 'isomorphic-fetch';
-export function LoginAction()
+export function loginAction()
 {
 	return (dispatch,getState)=>{
 		console.log(getState());
