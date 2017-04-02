@@ -4,16 +4,22 @@ export function loginAction()
 	return (dispatch,getState)=>{
 		console.log(getState());
 		let state=getState();
-		fetch("http://192.168.38.143/login",{
+		//fetch("http://192.168.1.6:4000");
+		fetch("http://192.168.1.6:4000/admin/login",{
 			method:"POST",
+			mode:'cors',
 			headers:{
-				'Content-Type':'application/json'
+				"Accept":'application/json',
+				"Content-Type":'application/json'
 			},
-			body:JSON.stringify({
-				username:state.username,
-				password:state.password
-			})
+			credentials:'include',
+			body:JSON.stringify({username:"a",password:2})
+		}).then(res=>{
+			console.log(res.headers.get());
+			return res.json();
+		}).then(json=>{
+			console.log(json);
 		});
-		return Promise.resolve();
+		dispatch({type:"TEST2"});
 	};
 }

@@ -26,6 +26,7 @@ class Login extends React.Component
 	onSubmit=()=>
 	{
 		console.log("submit");
+		this.props.loginAction();
 	}
 	render()
 	{
@@ -52,7 +53,7 @@ class Login extends React.Component
 								Please Enter Your Information
 							</h4>
 							<div className='space-6'/>
-							<form>
+							<div>
 								<div className='input-group'>
 									<input type='text' className='form-control' placeholder='Username' aria-describedby='basic-addon1' />
 									<span className='input-group-addon' id='basic-addon1'></span>
@@ -75,7 +76,7 @@ class Login extends React.Component
 										<button type='submit' class='btn btn-primary' onClick={this.onSubmit}>Sign in</button>
 									</div>
 								</div>
-							</form>
+							</div>
 						</div>
 					</div>
 					<div className="col"></div>
