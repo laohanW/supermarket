@@ -1,9 +1,12 @@
-const webpack =require('webpack');
-const webpackMerge =require('webpack-merge');
-const baseConfig =require('./webpack.base.config.js');
-const autoprefixer =require('autoprefixer');
+var webpack =require('webpack');
+var webpackMerge =require('webpack-merge');
+var baseConfig =require('./webpack.base.config.js');
+var autoprefixer =require('autoprefixer');
 
 module.exports=webpackMerge(baseConfig,{
+	output:{
+		sourceMapFilename:"[name].map"
+	},
 	devtool:"#cheap-module-eval-source-map",
 	plugins:[
 		new webpack.HotModuleReplacementPlugin(),

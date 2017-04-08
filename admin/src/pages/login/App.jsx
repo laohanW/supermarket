@@ -28,7 +28,7 @@ class App extends React.Component
 	{
 		return(
 			<Provider store={this.store}>
-				<BrowserRouter>
+				<BrowserRouter basename='/render/login'>
 					<div>
 						<Route exact path="/" component={Login} />
 						<Route path="/register" component={Register} />

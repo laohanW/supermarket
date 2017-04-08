@@ -1,22 +1,22 @@
-const path = require('path');
-const ExtractTextWebpackPlugin =require('extract-text-webpack-plugin');
-const HtmlWebpackPlugin =require('html-webpack-plugin');
-const dirPages=path.resolve(__dirname,'../src/pages');
-const dirTemplate = path.resolve(__dirname,'../src/templates');
-const pages=[
+var config = require('../config');
+var path = require('path');
+var ExtractTextWebpackPlugin =require('extract-text-webpack-plugin');
+var HtmlWebpackPlugin =require('html-webpack-plugin');
+var pages=[
 	"index",
 	"login"
 ];
-
-const bootstraprcRoot=path.resolve(__dirname,"../.bootstraprc");
-const bootstraprc="bootstrap-loader/lib/bootstrap.loader?extractStyles"+
+var pro=process.env.NODE_ENV==='production';
+var host=pro?config.server.productionUrl:config.server.developmentUrl;
+var bootstraprcRoot=path.resolve(__dirname,"../.bootstraprc");
+var bootstraprc="bootstrap-loader/lib/bootstrap.loader?extractStyles"+
 		"&configFilePath="+bootstraprcRoot+
 		"!bootstrap-loader/no-op.js";
 
-const entryConfig={};
+var entryConfig={};
 pages.forEach(function(page)
 {
-	entryConfig[page]=["bootstrap-loader",bootstraprc,"tether",path.resolve(dirPages,page+"/index.jsx")];
+	entryConfig[page]=["bootstrap-loader",bootstraprc,"tether",path.resolve(config.webpack.dir.page,page+"/index.jsx")];
 });
 
 module.exports=
@@ -24,9 +24,8 @@ module.exports=
 	entry:entryConfig,
 	output:{
 		filename:"[name]/index.js",
-		path:path.resolve(__dirname,"../build"),
-		publicPath:"./",
-		sourceMapFilename:"[name].map"
+		path:config.webpack.outputPath,
+		publicPath:host
 	},
 	module:{
 		rules:[
@@ -82,7 +81,7 @@ module.exports=
 		new HtmlWebpackPlugin({
 			title:"index",
 			filename:"index/index.html",
-			template:path.resolve(dirTemplate,"index.html"),
+			template:path.resolve(config.webpack.dir.template,"index.html"),
 			inject:'body',
 			favicon:"",
 			showErrors:true,
@@ -92,7 +91,7 @@ module.exports=
 		new HtmlWebpackPlugin({
 			title:"login",
 			filename:"login/index.html",
-			template:path.resolve(dirTemplate,"login.html"),
+			template:path.resolve(config.webpack.dir.template,"login.html"),
 			inject:'body',
 			favicon:"",
 			showErrors:true,

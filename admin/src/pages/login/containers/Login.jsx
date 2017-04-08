@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {loginAction} from '../actions/Login';
+import {loginAction,registerAction} from '../actions/Login';
 import {bindActionCreators} from 'redux';
 class Login extends React.Component
 {
@@ -10,6 +10,10 @@ class Login extends React.Component
 	constructor(props)
 	{
 		super(props);
+		this.state={
+			username:"",
+			password:''
+		};
 	}
 	shouldComponentUpdate(dataProps,dataState)
 	{
@@ -23,10 +27,12 @@ class Login extends React.Component
 	{
 		
 	}
-	onSubmit=()=>
+	onRegister=()=>{
+		this.props.registerAction(this.refs.username.value,this.refs.password.value);
+	}
+	onLogin=()=>
 	{
-		console.log("submit");
-		this.props.loginAction();
+		this.props.loginAction(this.refs.username.value,this.refs.password.value);
 	}
 	render()
 	{
@@ -55,11 +61,11 @@ class Login extends React.Component
 							<div className='space-6'/>
 							<div>
 								<div className='input-group'>
-									<input type='text' className='form-control' placeholder='Username' aria-describedby='basic-addon1' />
+									<input type='text' className='form-control' placeholder='Username' aria-describedby='basic-addon1' ref='username'/>
 									<span className='input-group-addon' id='basic-addon1'></span>
 								</div>
 								<div className='input-group'>
-									<input type='password' className='form-control' placeholder='Password' aria-describedby='basic-addon2' />
+									<input type='password' className='form-control' placeholder='Password' aria-describedby='basic-addon2' ref='password'/>
 									<span className='input-group-addon' id='basic-addon2'></span>
 								</div>
 								<div className='form-group row'>
@@ -73,7 +79,8 @@ class Login extends React.Component
 								</div>
 								<div className='form-group row'>
 									<div className='offset-sm-2 col-sm-10'>
-										<button type='submit' class='btn btn-primary' onClick={this.onSubmit}>Sign in</button>
+										<button type='submit' class='btn btn-primary' onClick={this.onLogin}>Sign in</button>
+										<button type='submit' class='btn btn-primary' onClick={this.onRegister}>Register</button>
 									</div>
 								</div>
 							</div>
@@ -103,7 +110,8 @@ function mapStateToProps(state,ownProps)
 function mapDispatchToProps(dispatch)
 {
 	return {
-		loginAction:bindActionCreators(loginAction,dispatch)
+		loginAction:bindActionCreators(loginAction,dispatch),
+		registerAction:bindActionCreators(registerAction,dispatch)
 	};
 }
 export default connect(mapStateToProps,mapDispatchToProps)(Login);

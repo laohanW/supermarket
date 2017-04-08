@@ -1,38 +1,39 @@
-const express =require('express');
-const session =require('express-session');
-const cookieParse=require('cookie-parser');
-const bodyParser =require('body-parser');
-const MongoStore=require('connect-mongo')(session);
-const mongoose=require('mongoose');
+var express     = require('express');
+var session     = require('express-session');
+var cookieParse = require('cookie-parser');
+var bodyParser  = require('body-parser');
+var validator   = require('express-validator');
+var MongoStore  = require('connect-mongo')(session);
+var mongoose    = require('mongoose');
+var app         = express();
+var admin       = require('./src/admin/index.js');
 mongoose.connect("localhost:27017/test");
-const app=express();
-const routes =require('./src/routes');
+app.set('env',process.env_NODE_ENV);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:false}));
-app.use(cookieParse());
+app.use(cookieParse("keyboard cat"));
+app.use(validator());
 app.use(session({
-	name:"skey",
-	secret:"keyboard cat",
-	store:new FileStore({
-		path:"./sessions"
-	}),
-	saveUninitialized:false,
-	resave:false,
-	cookie:{
-		maxAge:60*1000
+	name              : "skey",
+	secret            : "keyboard cat",
+	store             : new MongoStore({mongooseConnection : mongoose.connection}),
+	saveUninitialized : false,
+	resave            : false,
+	cookie            : {
+		maxAge        : 18*60*1000
 	}
 }));
-routes(app);
-/*app.post('*',function(req,res)
+app.use('/admin',admin);
+app.use(function(req,res,next)
 {
-	console.log("body:"+JSON.stringify(req.body));
-	console.log("json:"+req.json);
-	console.log("param:"+req.param);
-	res.json({result:"success"});
-});*/
-const server=app.listen(4000,function()
+	var err    = new Error('Not Found');
+	err.status = 404;
+	next(err);
+});
+
+var server = app.listen(4000,function()
 {
-	let address=server.address().address;
-	let port=server.address().port;
+	var address = server.address().address;
+	var port    = server.address().port;
 	console.log('listening at  '+address+" :"+port);
 });
