@@ -101,6 +101,9 @@ module.exports=
 		new ExtractTextWebpackPlugin("[name]/style.css")
 	],
 	resolve:{
+		alias:{
+			core:path.resolve(__dirname,"../src/core")	
+		},
 		extensions:['.js','.jsx','.scss']
 	}
 };

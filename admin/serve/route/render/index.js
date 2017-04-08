@@ -4,16 +4,7 @@ router.get('/',function(req,res)
 {
 	console.log('get');
 	console.log(req.cookies);
-});
-router.get('/index',function(req,res)
-{	
-	console.log('get');
-	res.render("index");
-	res.end();
-});
-router.get('/login',function(req,res)
-{
+	console.log(req.session);
 	res.render('login');
-	res.end();
 });
 module.exports=router;

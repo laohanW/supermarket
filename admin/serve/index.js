@@ -29,8 +29,8 @@ var options = {
 app.use(express.static(path.resolve(__dirname,'../build'),options));
 app.use(validator());
 app.use(cookieParser());
-app.user(bodyParser.json());
-aapp.use(session({
+app.use(bodyParser.json());
+app.use(session({
 	name              : "skey",
 	secret            : "keyboard cat",
 	store             : new MongoStore({mongooseConnection : mongoose.connection}),
@@ -41,6 +41,7 @@ aapp.use(session({
 	}
 }));
 app.use(bodyParser.urlencoded({extended:false}));
+mongoose.Promise=global.Promise;
 mongoose.connect(config.mongo.host+"/"+config.mongo.db);
 routes.forEach(function(p){
 	app.use(p.url,p.route);
