@@ -4,7 +4,7 @@ var userController = require('../../controller/userController');
 router.post('/login',function(req,res)
 {
 	console.log("login");
-	console.log(req.session);		
+	console.log(req.sessionID);		
 	req.checkBody('username',errorCode.login_invalid).notEmpty();
 	req.checkBody('password',errorCode.login_invalid).notEmpty();
 	var errors=req.validationErrors();
@@ -41,12 +41,14 @@ router.post('/login',function(req,res)
 		else{
 			req.session.username=username;
 			req.session.user=user;
+			
 			res.json({
 				result:{
 					code:[errorCode.success]
 				}
 			});
 			console.log(req);
+			console.log('ok');
 			res.end();
 		}
 	});
