@@ -2,6 +2,7 @@ var webpack =require('webpack');
 var webpackMerge =require('webpack-merge');
 var baseConfig =require('./webpack.base.config.js');
 var autoprefixer =require('autoprefixer');
+var config = require('../config');
 
 module.exports=webpackMerge(baseConfig,{
 	output:{
@@ -20,9 +21,7 @@ module.exports=webpackMerge(baseConfig,{
 			postcss:[autoprefixer]
 		}),
 		new webpack.DefinePlugin({
-			'process.env':{
-				NODE_ENV:JSON.stringify('production')
-			}
+			'process.env.NODE_ENV':JSON.stringify('development')
 		})
 	]
 });

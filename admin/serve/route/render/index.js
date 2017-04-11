@@ -2,9 +2,12 @@ var express=require('express');
 var router = express.Router();
 router.get('/',function(req,res)
 {
-	console.log('get');
-	console.log(req.cookies);
-	console.log(req.session);
-	res.render('login');
+	if (req.session.login)
+	{
+		res.render('index');
+	}
+	else
+		res.render('login');
+	res.end();
 });
 module.exports=router;

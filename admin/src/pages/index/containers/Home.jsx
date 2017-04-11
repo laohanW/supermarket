@@ -1,10 +1,9 @@
 import React from 'react';
+import Navbar from './Navbar';
+import Footer from './Footer';
 
-class Dashboard extends React.Component
+class Home extends React.Component
 {
-	static propTypes={
-		
-	};
 	constructor(props)
 	{
 		super(props);
@@ -25,7 +24,8 @@ class Dashboard extends React.Component
 	{
 		return(
 			<div>
-				Dashboard
+				<Navbar />
+				<Footer />
 			</div>
 		);
 	}
@@ -38,4 +38,4 @@ class Dashboard extends React.Component
 		
 	}
 }
-export default Dashboard;
+export default Home;

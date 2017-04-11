@@ -4,9 +4,6 @@ import {loginAction,registerAction} from '../actions/Login';
 import {bindActionCreators} from 'redux';
 class Login extends React.Component
 {
-	static propTypes={
-		
-	};
 	constructor(props)
 	{
 		super(props);

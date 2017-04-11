@@ -1,5 +1,5 @@
 import {combineReducers} from 'redux';
 var reducers=combineReducers({
-	Dashboard:require('./Dashboard')
+	Dashboard:require('./Home')
 });
 export default reducers;

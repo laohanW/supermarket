@@ -1,35 +1,35 @@
 import fetch from 'isomorphic-fetch';
 import errorCode from 'core/constant/errorCode';
-import history from 'history';
-const protocol='http://192.168.1.6:3000';
+import {url} from 'core/constant/protocol';
 export function loginAction(username,password)
 {
 	return (dispatch)=>{
 		//fetch("http://192.168.1.6:4000");
-		fetch(protocol+"/api/login",{
+		fetch(url+"/api/login",{
 			method:"POST",
 			headers:{
 				'Content-Type':'application/json',
 				'Accept':'application/json'
 			},
+			credentials:'same-origin',
 			body:JSON.stringify({'username':username,'password':password})
 		}).then(res=>{
-			console.log(res);
 			return res.json();
 		}).then(json=>{
-			console.log(json);
 			if (json.result.code==errorCode.success)
 			{
-				fetch(protocol+'/render');
+				window.location.reload(true);
 			}
 			dispatch({type:"TEST2"});
+		}).catch(err=>{
+			console.log(err);
 		});
 	};
 }
 export function registerAction(username,password)
 {
 	return (dispatch)=>{
-		fetch(protocol+'/api/register',{
+		fetch(url+'/api/register',{
 			method:"POST",
 			headers:{
 				'Content-Type':'application/json',
@@ -37,10 +37,11 @@ export function registerAction(username,password)
 			},
 			body:JSON.stringify({'username':username,'password':password})
 		}).then(res=>{
-			console.log(res);
 			return res.json();
 		}).then(json=>{
 			console.log(json);
+		}).catch(err=>{
+			console.log(err);
 		});
 		dispatch({type:"TEST3"});
 	};

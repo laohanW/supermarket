@@ -28,16 +28,16 @@ var options = {
 };
 app.use(express.static(path.resolve(__dirname,'../build'),options));
 app.use(validator());
-app.use(cookieParser());
+app.use(cookieParser(config.iron.secret));
 app.use(bodyParser.json());
 app.use(session({
-	name              : "skey",
-	secret            : "keyboard cat",
+	name              : "sessionid",
+	secret            : config.iron.secret,
 	store             : new MongoStore({mongooseConnection : mongoose.connection}),
-	saveUninitialized : false,
-	resave            : false,
+	saveUninitialized : true,
+	resave            : true,
 	cookie            : {
-		maxAge        : 18*60*1000
+		maxAge        : 60*1000
 	}
 }));
 app.use(bodyParser.urlencoded({extended:false}));

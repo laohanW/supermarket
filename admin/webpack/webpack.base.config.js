@@ -1,4 +1,5 @@
 var config = require('../config');
+var webpack = require('webpack');
 var path = require('path');
 var ExtractTextWebpackPlugin =require('extract-text-webpack-plugin');
 var HtmlWebpackPlugin =require('html-webpack-plugin');
@@ -7,7 +8,7 @@ var pages=[
 	"login"
 ];
 var pro=process.env.NODE_ENV==='production';
-var host=pro?config.server.productionUrl:config.server.developmentUrl;
+var host=pro?config.server.productionUrl:(process.env.HOST || config.server.developmentUrl);
 var bootstraprcRoot=path.resolve(__dirname,"../.bootstraprc");
 var bootstraprc="bootstrap-loader/lib/bootstrap.loader?extractStyles"+
 		"&configFilePath="+bootstraprcRoot+
@@ -98,11 +99,15 @@ module.exports=
 			xhtml:false,
 			chunks:['login']
 		}),
-		new ExtractTextWebpackPlugin("[name]/style.css")
+		new ExtractTextWebpackPlugin("[name]/style.css"),
+		new webpack.DefinePlugin({
+			'__HOST':JSON.stringify(host)
+		})
 	],
 	resolve:{
 		alias:{
-			core:path.resolve(__dirname,"../src/core")	
+			core:path.resolve(__dirname,"../src/core"),
+			root:path.resolve(__dirname,"../")
 		},
 		extensions:['.js','.jsx','.scss']
 	}
