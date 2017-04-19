@@ -47,7 +47,7 @@ routes.forEach(function(p){
 	app.use(p.url,p.route);
 });
 
-var server=app.listen(3000,function()
+var server=app.listen(__HOST,function()
 {
 	var address=server.address().address;
 	var port=server.address().port;
