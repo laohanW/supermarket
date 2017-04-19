@@ -1,14 +1,6 @@
 var express = require('express');
-module.export=[
-	{
-		url:"/api",
-		route:routeConfig(require('./api'))
-	},
-	{
-		url:"/assets",
-		route:routeConfig(require('./assets'))
-	}
-];
+var api = require('./api');
+var assets = require('./assets');
 function routeConfig(config)
 {
 	var router=express.Router();
@@ -16,14 +8,24 @@ function routeConfig(config)
 	{
 		if (c.method==="POST")
 		{
-			router.post(c.url,route);
+			router.post(c.url,...c.route);
 		}
 		else if(c.method==="GET"){
-			router.get(c.url,route);
+			router.get(c.url,...c.route);
 		}
 		else if(c.method==="PUT"){
-			router.put(c.url,route);
+			router.put(c.url,...c.route);
 		}
 	});
 	return router;
 }
+module.exports=[
+	{
+		url:"/api",
+		route:routeConfig(api)
+	},
+	{
+		url:"/assets",
+		route:routeConfig(assets)
+	}
+];

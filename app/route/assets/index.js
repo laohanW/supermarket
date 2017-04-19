@@ -1,4 +1,9 @@
-var router = require('express').Router();
-
-
-module.export=router;
+module.exports=[
+	{
+		url:"/blogList",
+		method:"GET",
+		route:[
+			require('./blogList')
+		]
+	}
+];
