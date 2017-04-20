@@ -1,9 +1,13 @@
-module.exports=[
-	{
-		url:"/blogList",
-		method:"GET",
-		route:[
-			require('./blogList')
-		]
-	}
-];
+module.exports=
+{
+	router:
+	[
+		{
+			url:"/blogList",
+			method:"GET",
+			route:[
+				require('./blogList')
+			]
+		}
+	]
+};

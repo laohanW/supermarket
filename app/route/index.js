@@ -4,7 +4,14 @@ var assets = require('./assets');
 function routeConfig(config)
 {
 	var router=express.Router();
-	config.forEach(function(c,i)
+	if(config.middleware)
+	{
+		config.middleware.forEach(function(m,i)
+		{
+			router.use(m);
+		});
+	}
+	config.router.forEach(function(c,i)
 	{
 		if (c.method==="POST")
 		{

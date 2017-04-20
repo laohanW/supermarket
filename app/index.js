@@ -1,12 +1,7 @@
 var express = require('express');
-var bodyParser = require('body-parser');
-var validation = require('express-validator');
-var config = require('./config');
 var routes = require('./route');
 require('./global');
 var app=express();
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended:false}));
 routes.forEach(function(route,i)
 {
 	app.use(route.url,route.route);	

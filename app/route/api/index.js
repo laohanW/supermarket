@@ -1,31 +1,67 @@
-
-module.exports=[
-	{
-		url:"/login",
-		method:"POST",
-		route:[
-			function(req,res,next)
-			{
-				req.checkBody('username',"").notEmpty();
-				var errors=	req.validationErrors();
-				if(errors && errors.length>0)
+var utility = require('../../core/utility');
+var bodyParser = require('body-parser');
+var expressJwt = require('express-jwt');
+var config = require('../../config');
+var expressValidator = require('express-validator');
+module.exports={
+	middleware:
+	[
+		bodyParser.json(),
+		bodyParser.urlencoded({extended:false}),
+		expressJwt({secret:config.iron.secret}).unless({path:['/api/login']}),
+		expressValidator({
+			customValidators:{
+				isArray:function(value)
 				{
-					var msgs=[];
-					errors.forEach(function(e,i)
-					{
-						msgs.push(e);
-					});
-					res.json({
-						result:{
-							code:301
-						}
-					});
+					return Array.isArray(value);
 				}
-				else{
-					next();
+			}
+		})
+	],
+	router:[
+		{
+			url:"/login",
+			method:"POST",
+			route:[
+				utility.validation({
+					"username":{
+						notEmpty:true,
+						errorMessage:"user is invalid"
+					}
+				}),
+				require('./login')
+			]
+		},
+		{
+			url:"/register",
+			method:"POST",
+			route:[
+				utility.validation({
+					"username":{
+						notEmpty:true,
+						errorMessage:"user is empty"
+					}
+				}),
+				require('./register')
+			]
+		},
+		{
+			url:"/test",
+			method:"POST",
+			route:[
+				utility.jwt({secret:global.__SECRET}),
+				utility.validation({
+					"username":{
+						notEmpty:true,
+						errorMessage:"user is invalid"
+					}
+				}),
+				function(req,res)
+				{
+					res.json({result:{code:200,msg:"success"}});
+					res.end();
 				}
-			},
-			require('./login')
-		]
-	}
-];
+			]
+		}
+	]
+};
