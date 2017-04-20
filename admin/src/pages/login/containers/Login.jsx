@@ -76,8 +76,8 @@ class Login extends React.Component
 								</div>
 								<div className='form-group row'>
 									<div className='offset-sm-2 col-sm-10'>
-										<button type='submit' class='btn btn-primary' onClick={this.onLogin}>Sign in</button>
-										<button type='submit' class='btn btn-primary' onClick={this.onRegister}>Register</button>
+										<button type='submit' className='btn btn-primary' onClick={this.onLogin}>Sign in</button>
+										<button type='submit' className='btn btn-primary' onClick={this.onRegister}>Register</button>
 									</div>
 								</div>
 							</div>
@@ -111,4 +111,4 @@ function mapDispatchToProps(dispatch)
 		registerAction:bindActionCreators(registerAction,dispatch)
 	};
 }
-export default connect(mapStateToProps,mapDispatchToProps)(Login);
+export default connect(null,mapDispatchToProps)(Login);

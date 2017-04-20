@@ -1,6 +1,6 @@
 import React from 'react';
 
-class Footer extends React.Component
+class UserManager extends React.Component
 {
 	constructor(props)
 	{
@@ -8,7 +8,7 @@ class Footer extends React.Component
 	}
 	shouldComponentUpdate(dataProps,dataState)
 	{
-		return true;		
+		return true;	
 	}
 	componentWillReceiveProps()
 	{
@@ -22,8 +22,8 @@ class Footer extends React.Component
 	{
 		return(
 			<div>
-				
-			</div>
+
+			</div>	
 		);
 	}
 	componentDidMount()
@@ -35,4 +35,4 @@ class Footer extends React.Component
 		
 	}
 }
-export default Footer;
+export default UserManager;

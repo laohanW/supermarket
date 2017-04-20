@@ -2,7 +2,7 @@ import React from 'react';
 import Navbar from './Navbar';
 import Footer from './Footer';
 import Sidebar from './Sidebar';
-import Content from './Content';
+import MainContent from './MainContent';
 
 class Home extends React.Component
 {
@@ -12,7 +12,7 @@ class Home extends React.Component
 	}
 	shouldComponentUpdate(dataProps,dataState)
 	{
-		
+		return true;		
 	}
 	componentWillReceiveProps()
 	{
@@ -30,7 +30,7 @@ class Home extends React.Component
 				<div className='container-fluid'> 
 					<div className="row">
 						<Sidebar />
-						<Content />
+						<MainContent />
 					</div>
 				</div>
 				<Footer />

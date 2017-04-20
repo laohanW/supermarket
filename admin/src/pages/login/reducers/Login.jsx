@@ -1,9 +1,9 @@
 
 
 
-export default function Login(state={},action)
+function Login(state={},action)
 {
-	switch(action)
+	switch(action.type)
 	{
 		case "TEST":
 			return Object.assign({},state,{
@@ -13,3 +13,4 @@ export default function Login(state={},action)
 			return state;
 	}
 }
+export default Login;

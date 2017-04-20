@@ -1,9 +1,8 @@
-
-export default function Register(state={},action)
+function Register(state={},action)
 {
-	switch(action)
+	switch(action.type)
 	{
-		case "TEST":
+		case "TEST_TEGISTER":
 			return Object.assign({},state,{
 				test:2
 			});
@@ -11,3 +10,4 @@ export default function Register(state={},action)
 			return state;
 	}
 }
+export default Register;

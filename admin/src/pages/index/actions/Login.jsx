@@ -1,7 +1,8 @@
 import fetch from 'isomorphic-fetch';
 import {url} from 'core/constant/protocol';
 import errorCode from 'core/constant/errorCode';
-export function logoutAction()
+let LoginActions={};
+LoginActions.logoutAction=function()
 {
 	return dispatch=>{
 		fetch(url+"/api/logout",{
@@ -22,6 +23,7 @@ export function logoutAction()
 		}).catch(err=>{
 			console.log(err);
 		});
-		dispatch("TEST");
+		dispatch({type:"TEST"});
 	};
 }
+export default LoginActions;

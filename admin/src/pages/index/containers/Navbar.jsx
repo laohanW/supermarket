@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import {logoutAction} from '../actions/login';
+import LoginActions from '../actions/Login';
 class Navbar extends React.Component
 {
 	constructor(props)
@@ -11,7 +11,7 @@ class Navbar extends React.Component
 	}
 	shouldComponentUpdate(dataProps,dataState)
 	{
-		
+		return true;		
 	}
 	componentWillReceiveProps()
 	{
@@ -60,7 +60,7 @@ function mapStateToProps()
 function mapDispatchToProps(dispatch)
 {
 	return{
-		logoutAction:bindActionCreators(logoutAction,dispatch)
+		...bindActionCreators(LoginActions,dispatch)
 	};
 }
-export default connect(mapStateToProps,mapDispatchToProps)(Navbar);
+export default connect(null,mapDispatchToProps)(Navbar);

@@ -1,6 +1,6 @@
 import React from 'react';
 
-class Content extends React.Component
+class ImageManager extends React.Component
 {
 	constructor(props)
 	{
@@ -21,9 +21,9 @@ class Content extends React.Component
 	render()
 	{
 		return(
-			<div className='col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main'>
-				<h1 className='page-header'>Dashboard</h1>
-			</div>
+			<div>
+
+			</div>	
 		);
 	}
 	componentDidMount()
@@ -35,4 +35,4 @@ class Content extends React.Component
 		
 	}
 }
-export default Content;
+export default ImageManager;

@@ -1,5 +1,6 @@
 import React from 'react';
-
+import config from '../config';	
+import {Link} from 'react-router-dom';
 class  Sidebar extends React.Component
 {
 	constructor(props)
@@ -20,24 +21,21 @@ class  Sidebar extends React.Component
 	}
 	render()
 	{
+		let list=[];
+		Object.values(config).forEach((o,i)=>{
+			list.push(
+				(<ul className='nav nav-sidebar' key={i}>
+					<li>
+						<Link to={o.link}>{o.name}</Link>
+					</li>
+				</ul>)
+			);
+		});
 		return(
 			<div className='col-sm-3 col-md-2 sidebar'>
-				<ul className='nav nav-sidebar'>
-					<li className='acive'>
-						<a href="#">
-							OverView
-							<span className='sr-only'>current</span>
-						</a>
-					</li>
-				</ul>
-				<ul className='nav nav-sidebar'>
-					<li className='acive'>
-						<a href="#">
-							Test
-							<span className='sr-only'>current</span>
-						</a>
-					</li>
-				</ul>
+				{
+					list
+				}
 			</div>
 		);
 	}
