@@ -1,3 +1,4 @@
+var errorCode = require('../../core/constant/errorCode');
 var userController = require('../../controller/userController');
 module.exports=function(req,res)
 {

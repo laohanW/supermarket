@@ -1,6 +1,69 @@
-var router = require('express').Router();
-var errorCode = require('../../core/constant/errorCode');
-var userController = require('../../controller/userController');
+var express = require('express');
+var bodyParser = require('body-parser');
+var cookieParser = require('cookie-parser');
+var expressValidator = require('express-validator');
+var utility = require('../../core/utility');
+module.exports={
+	middleware:[
+		cookieParser(global.__SECRET),
+		bodyParser.json(),
+		bodyParser.urlencoded({extended:false}),
+		expressValidator({
+			customValidators:{
+				isArray:function(value)
+				{
+					return Array.isArray(value);
+				}
+			}
+		})
+	],
+	router:[
+		{
+			url:"/login",
+			method:"POST",
+			route:[
+				utility.validation({
+					"username":{
+						notEmpty:true,
+						errorMessage:"username is empty"
+					},
+					"password":{
+						notEmpty:true,
+						errorMessage:"password is empty"
+					}
+				}),
+				require('./login')
+			]
+		},
+		{
+			url:"/register",
+			method:"POST",
+			route:[
+				utility.validation({
+					"username":{
+						notEmpty:true,
+						errorMessage:"username is empty"
+					},
+					"password":{
+						notEmpty:true,
+						errorMessage:"password is empty"
+					}
+				}),
+				require('./register')
+			]
+		},
+		{
+			url:"/logout",
+			method:"POST",
+			route:[
+				require('./logout')
+			]
+		}
+	]
+};
+
+/*
+
 router.post('/login',function(req,res)
 {
 	console.log("login");
@@ -121,4 +184,4 @@ router.post('/logout',function(req,res)
 	});
 	res.end();
 });
-module.exports=router;
+module.exports=router;*/

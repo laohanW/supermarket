@@ -1,6 +1,8 @@
 import React from 'react';
 import Navbar from './Navbar';
 import Footer from './Footer';
+import Sidebar from './Sidebar';
+import Content from './Content';
 
 class Home extends React.Component
 {
@@ -25,6 +27,12 @@ class Home extends React.Component
 		return(
 			<div>
 				<Navbar />
+				<div className='container-fluid'> 
+					<div className="row">
+						<Sidebar />
+						<Content />
+					</div>
+				</div>
 				<Footer />
 			</div>
 		);

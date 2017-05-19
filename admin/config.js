@@ -18,8 +18,10 @@ module.exports={
 			algorithms:'HS256'
 		},
 		protocol:'http://',
-		developmentUrl:'http://192.168.38.135:3000',
-		productionUrl:'http://192.168.38.134:8080'
+		developmentUrl:'http://192.168.38.138:3000',
+		developmentPort:"3000",
+		productionUrl:'http://192.168.38.134:8080',
+		productionPort:"8080"
 	},
 	user:{
 		token:{
