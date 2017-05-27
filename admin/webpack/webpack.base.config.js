@@ -17,7 +17,7 @@ var bootstraprc="bootstrap-loader/lib/bootstrap.loader?extractStyles"+
 var entryConfig={};
 pages.forEach(function(page)
 {
-	entryConfig[page]=["bootstrap-loader",bootstraprc,"tether",path.resolve(config.webpack.dir.page,page+"/index.jsx")];
+	entryConfig[page]=["bootstrap-loader",bootstraprc,path.resolve(config.webpack.dir.page,page+"/index.jsx")];
 });
 
 module.exports=
@@ -52,14 +52,14 @@ module.exports=
 				test:/\.css$/,
 				use:ExtractTextWebpackPlugin.extract({
 					fallback:"style-loader",
-					use:"css-loader?sourceMap&modules&importLoaders=1&localIdentName=[local]"+"!postcss-loader"
+					use:"css-loader?sourceMap&modules"
 				})
 			},
 			{
 				test:/\.scss$/,
 				use:ExtractTextWebpackPlugin.extract({
 					fallback:"style-loader",
-					use:"css-loader?sourceMap&modules&importLoaders=2&localIdentName=[local]"+"!postcss-loader"+"!sass-loader?sourceMap"
+					use:"css-loader?sourceMap&modules"+"!sass-loader?sourceMap"
 				})
 			},
 			{

@@ -13,9 +13,6 @@ module.exports=webpackMerge(baseConfig,{
 		new webpack.HotModuleReplacementPlugin(),
 		new webpack.NoEmitOnErrorsPlugin(),
 		new webpack.ProvidePlugin({
-			"window.Tether":"tether",
-			$:"jquery",
-			jQuery:"jquery"
 		}),
 		new webpack.LoaderOptionsPlugin({
 			postcss:[autoprefixer]
